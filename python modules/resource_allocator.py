@@ -18,9 +18,9 @@ class resource_allocator:
     def __init__(self, resources: List[dict], capacity: float):
         self.allocated_resources = []
         resource_list = [resource_schema(**res) for res in resources]
-        self.fractional_knapsack(resource_list, capacity)  
+        self.selector(resource_list, capacity)  
         
-    def fractional_knapsack(self, resourses: List[resource_schema], capacity: float) -> List[resource_schema]:
+    def selector(self, resourses: List[resource_schema], capacity: float) -> List[resource_schema]:
         """
         Greedy approach for fractional knapsack.
         """

@@ -1,21 +1,27 @@
-from pydantic import BaseModel
+# priority_agent.py
+# Algorithm: Greedy — score each request, sort descending
+# No input files needed — works purely on list of request dicts
+ 
+
+from pydantic import BaseModel, Field
 from typing import List
 
 class priority_schema(BaseModel):
-    severity: str
-    people_affected: int
-    deadline_hours: float
-    distance_km: float
+    severity: str = Field(..., description="Severity level of the request")
+    people_affected: int = Field(..., description="Number of people affected")
+    deadline_hours: float = Field(..., description="Hours until deadline")
+    distance_km: float = Field(..., description="Distance to the location in kilometers")
+    need_type: str = Field(..., description="Type of need (e.g., medical, food, shelter)")
 
 class ranked_request(BaseModel):
-    id: str
-    location: str
-    severity: str
-    people_affected: int
-    deadline_hours: float
-    distance_km: float
-    need_type: str
-    score: float = 0.0
+    id: str = Field(..., description="Unique identifier for the request")
+    location: str = Field(..., description="Location of the request")
+    severity: str = Field(..., description="Severity level of the request")
+    people_affected: int = Field(..., description="Number of people affected")
+    deadline_hours: float = Field(..., description="Hours until deadline")
+    distance_km: float = Field(..., description="Distance to the location in kilometers")
+    need_type: str = Field(..., description="Type of need (e.g., medical, food, shelter)")
+    score: float = Field(0.0, description="Computed priority score")
     
 class priority_agent:
     
